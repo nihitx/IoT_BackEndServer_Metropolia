@@ -5,6 +5,12 @@ var Data = require('../models/data');
 
 /* GET api listing. */
 
+router.get('/', function(req, res, next) {
+    data = 'Hi, your currently using the IoT API, please follow the instructions on github'
+    res.send(JSON.stringify(data, undefined, 2));
+});
+
+
 router.get('/user', function(req, res, next) {
     User.find(function(err, users){
         res.send(JSON.stringify(users, undefined, 2));
