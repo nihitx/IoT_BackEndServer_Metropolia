@@ -19,7 +19,10 @@ router.get('/user', function(req, res, next) {
 });
 
 /* make a /data get without group ID to give instructions */
+router.get('/data', function(req, res, next) {
+    res.send('Please add a group id after data/*group_id*');
 
+});
 
 router.get('/data/:group_id', function(req, res, next) {
     var group_id = req.params.group_id;
