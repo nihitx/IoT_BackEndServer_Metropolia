@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var schema = new Schema({
-    group_id : {type : Number, required: true},
+    group_id : {type : Number, required: true, unique : true},
     password : {type : String, default: null},
     project : {type : String , default : null}
 });
