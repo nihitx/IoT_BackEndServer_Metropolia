@@ -67,7 +67,8 @@ router.post('/data/:group_id', function(req,res,next){
                 value: datas.value,
                 valueString : datas.valueString,
                 sensorStatus : datas.sensorStatus,
-                timeStamp : new Date().toJSON()
+                timeStamp : new Date().toJSON(),
+                JsonObj : datas.JsonObj
             });
             return data.save();
         })

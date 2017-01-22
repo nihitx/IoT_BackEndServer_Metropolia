@@ -6,7 +6,8 @@ var schema = new Schema({
     value :{type : Number , required : true} ,
     valueString : {type : String, required : true},
     sensorStatus : {type : Boolean , default : 0},
-    timeStamp  : {type :String , required : true}
+    timeStamp  : {type :String , required : true},
+    JsonObj : {type : Object, default : null }
 
 });
 
