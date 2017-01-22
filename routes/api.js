@@ -12,23 +12,6 @@ router.get('/user', function(req, res, next) {
 
 });
 
-// router.get('/data/:group_id', function(req, res, next) {
-//     var group_id = req.params.group_id;
-//     var object_id;
-//     User.find({group_id : group_id}, function(err, user){
-//         if(err){
-//             return res.send(err);
-//         }
-//         object_id = user[0]._id;
-//         Data.find({user : object_id}, function(err, docs){
-//             if(err){
-//                 return res.send(err);
-//             }
-//             res.send(JSON.stringify(docs, undefined, 2));
-//         });
-//     });
-// });
-
 router.get('/data/:group_id', function(req, res, next) {
     var group_id = req.params.group_id;
     var object_id;
@@ -43,8 +26,6 @@ router.get('/data/:group_id', function(req, res, next) {
            return  res.send(e);
     });
 });
-
-
 
 router.post('/user', function(req,res,next){
     var user = new User(req.body);
