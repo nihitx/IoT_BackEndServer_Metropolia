@@ -3,12 +3,15 @@ var Schema = mongoose.Schema;
 
 var schema = new Schema({
     user: {type: Schema.Types.ObjectId, ref: 'User', required : true},
-    value :{type : Number , required : true} ,
-    valueString : {type : String, required : true},
+    name :{type : String , required : true} ,
+    description : {type : String, required : true},
     sensorStatus : {type : Boolean , default : 0},
-    timeStamp  : {type :String , required : true},
-    JsonObj : {type : Object, default : null }
+    properties : {type : Object, default : null},
+    readings : {type : Object , default : null},
+    timeStamp  : {type :String , required : true}
 
 });
+
+
 
 module.exports = mongoose.model('Data', schema);

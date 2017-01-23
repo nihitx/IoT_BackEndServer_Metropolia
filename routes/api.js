@@ -57,11 +57,12 @@ router.post('/data/:group_id', function(req,res,next){
             var datas = req.body;
             var data = new Data({
                 user: object_id,
-                value: datas.value,
-                valueString : datas.valueString,
+                name: datas.name,
+                description : datas.description,
                 sensorStatus : datas.sensorStatus,
-                timeStamp : new Date().toJSON(),
-                JsonObj : datas.JsonObj
+                properties : datas.properties,
+                readings : datas.readings,
+                timeStamp : new Date().toJSON()
             });
             return data.save();
         })
