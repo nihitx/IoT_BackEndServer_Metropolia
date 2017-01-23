@@ -1,87 +1,157 @@
 # IoT BackEndServer
 
-One Paragraph of project description goes here
+This API has been created so that the students participating in IoT at Metropolia can use it to read and write data received from the sensors.
+All post request data needs to be formatted to JSON.
 
-## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+## Prerequisites
 
-### Prerequisites
-
-What things you need to install the software and how to install them
+You need to create a function that posts http requests(POST || GET) to store and to retrieve information. Below are some examples
 
 ```
-Give examples
-```
+Linux
+wget --post-data "username=Masnad" http://example.com
 
-### Installing
 
-A step by step series of examples that tell you have to get a development env running
+C++
 
-Say what the step will be
+include <iostream>
+#include <cpr.h>
 
-```
-Give the example
-```
+int main(int argc, char** argv) {
+    auto response = cpr::Get(cpr::Url{"http://httpbin.org/get"});
+    std::cout << response.text << std::endl;
+}
 
-And repeat
+ PHP
+$opts = array(
+  'http' => array(
+    'method'  => 'POST',
+    'header'  => 'Content-type: application/x-www-form-urlencoded'
+  )
+);
+$context  = stream_context_create($opts);
+$result = file_get_contents('https://example.com', false, $context);
 
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
-
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
 
 ```
-Give an example
+
+## Getting started with registering and viewing groups.
+
+First we register the group in our IOT API. The group has to send a POST request with a application/json body.
+To register we need **group_id**, **project_name** and **authors**, which are **REQUIRED** fields.**Password** is not required.
+Here is the url in which the **POST** request should be made.
+[https://iot-backend-metropolia.herokuapp.com/api/user](https://iot-backend-metropolia.herokuapp.com/api/user)
+
+Below is a example on how we registered via [POSTMAN](https://www.getpostman.com/) which is a GUI for testing API's.
+
+```
+{
+"group_id" : "9",
+"project_name" : "Back End API",
+"password" : "secret",
+"authors" : [
+			{ "name" : "Masnad"},
+			{"name" : "Morad"}
+			]
+}
+
 ```
 
-### And coding style tests
-
-Explain what these tests test and why
+The return for this post request will be
 
 ```
-Give an example
+Group registered successfully
+```
+
+If there is a error please check the error message. The error message will tell you what is wrong. Please do not add the same group twice
+since we track the other information with you **GROUP_ID**.
+If you want to see the other groups registered, please do a GET request by writing:
+[https://iot-backend-metropolia.herokuapp.com/api/user](https://iot-backend-metropolia.herokuapp.com/api/user)
+
+
+## Getting started with sending data and viewing.
+
+The user has to send a **POST** request to our IOT API with the application/json body.
+The POST request needs **name** , **description**, **sensorStatus** as required fields.
+The other two fields are **readings** and **properties**. This last two fields can accept any information. All information on this fields has to be
+JSON object.
+Here is the url in which the **POST** request should be made.
+[https://iot-backend-metropolia.herokuapp.com/api/data/{group_id}](https://iot-backend-metropolia.herokuapp.com/api/data/{group_id})
+
+We added our data by
+```
+https://iot-backend-metropolia.herokuapp.com/api/data/9
+// notice that the group_id is 9 after data/
+```
+Below we give a example on what kind of information you can send to the API.
+
+```
+{
+	"name" : "sensor 1",
+	"description" : "Sensor 1 description",
+	"sensorStatus" : "0",
+	"properties" : {
+		"property_key_1" : "property_value_1",
+		"property_key_2" : "property_value_2",
+		"property_key_3" : "property_value_3"
+	},
+	"readings" : [
+			{
+				"value" : "35",
+				"created_at" : "2017-01-22"
+			},
+			{
+				"value" : "201",
+				"created_at" : "2017-01-22"
+			},
+			{
+				"value" : "666",
+				"created_at" : "2017-01-22"
+			}
+		]
+}
+
+// properties and readings are randomly generated so you can submit any type of information.
+// They just have to be converted to JSON data.
+
+```
+
+To see all your data just send a GET request to the same url with your **group_id**.
+[https://iot-backend-metropolia.herokuapp.com/api/data/{group_id}](https://iot-backend-metropolia.herokuapp.com/api/data/{group_id})
+
+
+
+### Coding
+
+The API is built with node.js with express framework. Mongoose is used as a object modeling tool in this API.
+The database is mongo DB.
+
+```
+// Simple code to show the homepage
+
+router.get('/', function(req, res, next) {
+  res.render('index', { title: 'IOT BACKEND METROPOLIA' });
+});
+
 ```
 
 ## Deployment
 
-Add additional notes about how to deploy this on a live system
+This API is deployed on HEROKU.
 
 ## Built With
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
-
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags).
+* [NodeJS](https://nodejs.org/en/) SERVER
+* [EXPRESSJS](https://expressjs.com/) - FRAMEWORK
+* [MONGODB](https://www.mongodb.com/) - DATABASE
 
 ## Authors
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+* **Masnad Nehith**
+* **Morad Boukhari**
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License
 
-## Acknowledgments
-
-* Hat tip to anyone who's code was used
-* Inspiration
-* etc
