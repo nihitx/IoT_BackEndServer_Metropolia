@@ -116,6 +116,11 @@ Below we give a example on what kind of information you can send to the API.
 // They just have to be converted to JSON data.
 
 ```
+The return for this post request will be
+
+```
+Data Saved
+```
 
 To see all your data just send a GET request to the same url with your **group_id**.
 [https://iot-backend-metropolia.herokuapp.com/api/data/{group_id}](https://iot-backend-metropolia.herokuapp.com/api/data/{group_id})
