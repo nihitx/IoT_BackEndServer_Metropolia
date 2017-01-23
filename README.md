@@ -151,10 +151,6 @@ This API is deployed on HEROKU.
 * [EXPRESSJS](https://expressjs.com/) - FRAMEWORK
 * [MONGODB](https://www.mongodb.com/) - DATABASE
 
-## Authors
-
-* **Masnad Nehith**
-* **Morad Boukhari**
 
 ## License
 
