@@ -6,12 +6,15 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var router = require('express-promise-router')();
+var cors = require('cors')
 
 
 var index = require('./routes/index');
 var api = require('./routes/api');
 
 var app = express();
+
+app.use(cors());
 
 /* connected mongoose to db*/
 mongoose.Promise = global.Promise;
