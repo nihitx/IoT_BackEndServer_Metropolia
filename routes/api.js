@@ -13,7 +13,8 @@ router.get('/', function(req, res, next) {
 
 router.get('/user', function(req, res, next) {
     User.find(function(err, users){
-        res.send(JSON.stringify(users, undefined, 2));
+        res.set('Access-Control-Allow-Origin', '*');
+        res.json(users);
     });
 
 });
