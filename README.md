@@ -126,6 +126,15 @@ To see all your data just send a GET request to the same url with your **group_i
 [https://iot-backend-metropolia.herokuapp.com/api/data/{group_id}](https://iot-backend-metropolia.herokuapp.com/api/data/{group_id})
 
 
+## Deleting user and data
+To delete a user simply make a `post` request.
+```
+https://iot-backend-metropolia.herokuapp.com/api/deleteUser/{group_id}
+```
+To delete data for the group, simply make a `post` request.
+```
+https://iot-backend-metropolia.herokuapp.com/api/deletedata/{group_id}
+```
 
 ### Coding
 
