@@ -74,5 +74,40 @@ router.post('/data/:group_id', function(req,res,next){
     });
 });
 
+/* functionality to delete group information */
+
+/* functionality to delete all data for a perticular group */
+router.post('/deleteUser/:group_id', function(req,res,next){
+    var group_id = req.params.group_id;
+    User.find({group_id : group_id})
+        .then(function(user){
+            var object_id = user[0]._id;
+            User.remove({_id : object_id})
+                .then(function(data){
+                    return res.send('User removed');
+                })
+        })
+        .catch(function(e){
+            return res.send(e);
+        });
+});
+
+
+/* functionality to delete all data for a perticular group */
+router.post('/deletedata/:group_id', function(req,res,next){
+    var group_id = req.params.group_id;
+    User.find({group_id : group_id})
+        .then(function(user){
+            var object_id = user[0]._id;
+            Data.remove({user : object_id})
+            .then(function(data){
+                console.log(data);
+                return res.send('Data Removed');
+            })
+        })
+        .catch(function(e){
+            return res.send(e);
+        });
+});
 
 module.exports = router;
